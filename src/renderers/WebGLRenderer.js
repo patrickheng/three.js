@@ -1522,19 +1522,19 @@ function WebGLRenderer( parameters ) {
 
 			// wire up the material to this renderer's lighting state
 
-			uniforms.ambientLightColor.value = lights.state.ambient;
-			uniforms.directionalLights.value = lights.state.directional;
-			uniforms.spotLights.value = lights.state.spot;
-			uniforms.rectAreaLights.value = lights.state.rectArea;
-			uniforms.pointLights.value = lights.state.point;
-			uniforms.hemisphereLights.value = lights.state.hemi;
+			if ( uniforms.ambientLightColor ) uniforms.ambientLightColor.value = lights.state.ambient;
+			if ( uniforms.directionalLights ) uniforms.directionalLights.value = lights.state.directional;
+			if ( uniforms.spotLights ) uniforms.spotLights.value = lights.state.spot;
+			if ( uniforms.rectAreaLights ) uniforms.rectAreaLights.value = lights.state.rectArea;
+			if ( uniforms.pointLights ) uniforms.pointLights.value = lights.state.point;
+			if ( uniforms.hemisphereLights ) uniforms.hemisphereLights.value = lights.state.hemi;
 
-			uniforms.directionalShadowMap.value = lights.state.directionalShadowMap;
-			uniforms.directionalShadowMatrix.value = lights.state.directionalShadowMatrix;
-			uniforms.spotShadowMap.value = lights.state.spotShadowMap;
-			uniforms.spotShadowMatrix.value = lights.state.spotShadowMatrix;
-			uniforms.pointShadowMap.value = lights.state.pointShadowMap;
-			uniforms.pointShadowMatrix.value = lights.state.pointShadowMatrix;
+			if ( uniforms.directionalShadowMap ) uniforms.directionalShadowMap.value = lights.state.directionalShadowMap;
+			if ( uniforms.directionalShadowMatrix ) uniforms.directionalShadowMatrix.value = lights.state.directionalShadowMatrix;
+			if ( uniforms.spotShadowMap ) uniforms.spotShadowMap.value = lights.state.spotShadowMap;
+			if ( uniforms.spotShadowMatrix ) uniforms.spotShadowMatrix.value = lights.state.spotShadowMatrix;
+			if ( uniforms.pointShadowMap ) uniforms.pointShadowMap.value = lights.state.pointShadowMap;
+			if ( uniforms.pointShadowMatrix ) uniforms.pointShadowMatrix.value = lights.state.pointShadowMatrix;
 			// TODO (abelnation): add area lights shadow info to uniforms
 
 		}
@@ -2325,13 +2325,13 @@ function WebGLRenderer( parameters ) {
 
 	function markUniformsLightsNeedsUpdate( uniforms, value ) {
 
-		uniforms.ambientLightColor.needsUpdate = value;
+		if ( uniforms.ambientLightColor ) uniforms.ambientLightColor.needsUpdate = value;
 
-		uniforms.directionalLights.needsUpdate = value;
-		uniforms.pointLights.needsUpdate = value;
-		uniforms.spotLights.needsUpdate = value;
-		uniforms.rectAreaLights.needsUpdate = value;
-		uniforms.hemisphereLights.needsUpdate = value;
+		if ( uniforms.directionalLights ) uniforms.directionalLights.needsUpdate = value;
+		if ( uniforms.pointLights ) uniforms.pointLights.needsUpdate = value;
+		if ( uniforms.spotLights ) uniforms.spotLights.needsUpdate = value;
+		if ( uniforms.rectAreaLights ) uniforms.rectAreaLights.needsUpdate = value;
+		if ( uniforms.hemisphereLights ) uniforms.hemisphereLights.needsUpdate = value;
 
 	}
 
