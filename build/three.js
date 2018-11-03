@@ -18534,6 +18534,8 @@
 
 				}
 
+				if (!shadow.needsUpdate) continue;
+
 				var shadowCamera = shadow.camera;
 
 				_shadowMapSize.copy( shadow.mapSize );
@@ -18657,9 +18659,11 @@
 
 					// set object matrices & frustum culling
 
-					renderObject( scene, camera, shadowCamera, isPointLight );
+					renderObject( scene, camera, shadowCamera, shadow, isPointLight );
 
 				}
+
+				shadow.needsUpdate = false;
 
 			}
 
@@ -18777,14 +18781,23 @@
 
 		}
 
-		function renderObject( object, camera, shadowCamera, isPointLight ) {
-
+		function renderObject( object, camera, shadowCamera, shadow, isPointLight ) {
 			if ( object.visible === false ) return;
 
-			var visible = object.layers.test( camera.layers );
+			var visible = object.layers.test(camera.layers);
+			
+			var shadowWhitelist = shadow.whitelist;
+			var whitelisted = shadowWhitelist && shadowWhitelist.indexOf(object.name) !== -1;
 
-			if ( visible && ( object.isMesh || object.isLine || object.isPoints ) ) {
+			var shadowBlacklist = shadow.blacklist;
+			var blacklisted = shadowBlacklist && shadowBlacklist.indexOf(object.name) !== -1;
 
+			if (visible &&
+				( whitelisted || !shadowWhitelist ) &&
+				( !blacklisted || !shadowBlacklist ) &&
+				( object.isMesh || object.isLine || object.isPoints )
+			) {
+		
 				if ( object.castShadow && ( ! object.frustumCulled || _frustum.intersectsObject( object ) ) ) {
 
 					object.modelViewMatrix.multiplyMatrices( shadowCamera.matrixWorldInverse, object.matrixWorld );
@@ -18825,7 +18838,7 @@
 
 			for ( var i = 0, l = children.length; i < l; i ++ ) {
 
-				renderObject( children[ i ], camera, shadowCamera, isPointLight );
+				renderObject( children[ i ], camera, shadowCamera, shadow, isPointLight );
 
 			}
 
