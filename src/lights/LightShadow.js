@@ -17,6 +17,8 @@ function LightShadow( camera ) {
 	this.map = null;
 	this.matrix = new Matrix4();
 
+	this.needsUpdate = true;
+
 }
 
 Object.assign( LightShadow.prototype, {
