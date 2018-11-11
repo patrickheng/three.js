@@ -33,7 +33,8 @@ function UniformsCache() {
 						shadow: false,
 						shadowBias: 0,
 						shadowRadius: 1,
-						shadowMapSize: new Vector2()
+						shadowMapSize: new Vector2(),
+						shadowOpacity: 1
 					};
 					break;
 
@@ -50,7 +51,8 @@ function UniformsCache() {
 						shadow: false,
 						shadowBias: 0,
 						shadowRadius: 1,
-						shadowMapSize: new Vector2()
+						shadowMapSize: new Vector2(),
+						shadowOpacity: 1
 					};
 					break;
 
@@ -65,6 +67,7 @@ function UniformsCache() {
 						shadowBias: 0,
 						shadowRadius: 1,
 						shadowMapSize: new Vector2(),
+						shadowOpacity: 1,
 						shadowCameraNear: 1,
 						shadowCameraFar: 1000
 					};
@@ -186,6 +189,7 @@ function WebGLLights() {
 					uniforms.shadowBias = shadow.bias;
 					uniforms.shadowRadius = shadow.radius;
 					uniforms.shadowMapSize = shadow.mapSize;
+					uniforms.shadowOpacity = shadow.opacity;
 
 				}
 
@@ -223,6 +227,7 @@ function WebGLLights() {
 					uniforms.shadowBias = shadow.bias;
 					uniforms.shadowRadius = shadow.radius;
 					uniforms.shadowMapSize = shadow.mapSize;
+					uniforms.shadowOpacity = shadow.opacity;
 
 				}
 
@@ -284,6 +289,7 @@ function WebGLLights() {
 					uniforms.shadowBias = shadow.bias;
 					uniforms.shadowRadius = shadow.radius;
 					uniforms.shadowMapSize = shadow.mapSize;
+					uniforms.shadowOpacity = shadow.opacity;
 					uniforms.shadowCameraNear = shadow.camera.near;
 					uniforms.shadowCameraFar = shadow.camera.far;
 
